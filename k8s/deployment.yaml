@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ annotations:
+  deployment.kubernetes.io/revision: '1'
+ labels:
+  app: quizservice
+ name: quizservice
+ namespace: default
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: quizservice
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+   maxSurge: 1
+   maxUnavailable: 1
+ template:
+  metadata:
+   labels:
+    app: quizservice
+  spec:
+   containers:
+    - image: gremiumsoft/quizservice:latest
+#      imagePullPolicy: Always
+      imagePullPolicy: Never
+      name: quizservice
+#      livenessProbe:
+#        httpGet:
+#          path: /liveness_check
+#          port: 8080
+#        initialDelaySeconds: 5
+#        periodSeconds: 5
+#      readinessProbe:
+#        httpGet:
+#          path: /readiness_check
+#          port: 8080
+#        initialDelaySeconds: 3
+#        periodSeconds: 3
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          memory: 64Mi
+      terminationMessagePath: "/dev/termination-log"
+      terminationMessagePolicy: File
+   dnsPolicy: ClusterFirst
+   restartPolicy: Always
+   schedulerName: default-scheduler
+   securityContext: {}
+   terminationGracePeriodSeconds: 30
+

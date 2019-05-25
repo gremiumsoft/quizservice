@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-const port = 8001
+const port = 8000
 
 func main() {
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
@@ -35,15 +35,15 @@ func (quizServiceServer) GetQuestions(ctx context.Context, req *quiz.QuizRequest
 	// TODO(JN): Hardcode the data for now as we don't have any database
 	questionList.QuizQuestion = []*quiz.QuizQuestion{
 		{
-			Id: "kqtg5h5thg45",
-			Question: "Pick 1",
-			Answers: []string{"One", "Two", "Three"},
+			Id:               "kqtg5h5thg45",
+			Question:         "Pick 1",
+			Answers:          []string{"One", "Two", "Three"},
 			CorrectAnswerIdx: 0,
 		},
 		{
-			Id: "3hg35gk3g3h6",
-			Question: "How many days is in a year",
-			Answers: []string{"649", "356", "364.25", "9"},
+			Id:               "3hg35gk3g3h6",
+			Question:         "How many days is in a year",
+			Answers:          []string{"649", "356", "364.25", "9"},
 			CorrectAnswerIdx: 2,
 		},
 	}
