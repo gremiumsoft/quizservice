@@ -47,3 +47,7 @@ docker-deploy: docker-build
 .PHONY: deploy-latest
 deploy-latest:
 	kubectl patch deployment ${APPLICATION_NAME} -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+
+.PHONY: kube-apply
+kube-apply:
+	kubectl apply -f k8s/
